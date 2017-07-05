@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Chamados</title>  	
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+
+	<script src="js/react.js"></script>
+	<script src="js/react-dom.js"></script>
+	<script src="js/babel.min.js"></script>
+</head>
+<body>
+	<div id="root"></div>
+	<script src="js/boxes.js"></script>
+	<script type="text/babel">
+
+		class SideMenu extends React.Component{
+		render(){
+		return(
+		<div id="sidebar-wrapper">
+			<ul className="sidebar-nav">
+				<li className="sidebar-brand">
+					<a href="#">
+						Guia de Chamados
+					</a>
+				</li>
+				{
+				boxes.map(function(box, index){
+				return(
+				<li><a href={"#"+index}>{box.title}</a></li>
+				)
+			})}
+		</ul>
+	</div>
+	)
+}
+}
+
+class Root extends React.Component{
+render() {
+return(
+<div id="wrapper" className="toggled">
+	<SideMenu/>	
+	<div id="page-content-wrapper">
+		<div className="container-fluid">
+			<div className="row">
+				<div className="col-lg-12">
+					<h1 className="text-center">Guia de Atendimento de Chamados</h1>
+					<p className="text-center">Lembre-se de sempre entrar no módulo antes de clicar em algum link</p>
+					{
+					boxes.map(function(box, index){
+					return(
+					<div className="box" id={index}>
+						<h3><b>#{index+1}</b> - {box.title} - Módulo {box.modulo}</h3>
+						<a href={box.link} target="_blank">Clique aqui para ir direto para a página</a>
+						{
+						box.textsAndImgs.map(function(elem){
+						return(
+						<div>
+							<p>{elem.text}</p>
+							<img src={"img/"+elem.img} alt=""/>
+						</div>
+						)
+					})}
+
+				</div>
+				)
+			})}
+		</div>
+	</div>
+</div>
+</div>
+</div>
+)
+}
+}
+ReactDOM.render(
+<Root/>,
+document.getElementById('root')
+);
+</script>
+</body>
+</html>
